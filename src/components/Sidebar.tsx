@@ -17,7 +17,7 @@ const Sidebar = () => {
         <img src={dancoLogo} alt="Danco" className="w-9 h-9 rounded-lg object-contain bg-white p-0.5" />
         <div>
           <h1 className="text-sidebar-active text-base font-bold tracking-tight">Danco LeadFlow</h1>
-          <p className="text-sidebar-foreground text-[11px] leading-tight">Lead Management</p>
+          <p className="text-sidebar-foreground text-[11px] leading-tight">Quality • Trust • Innovation</p>
         </div>
       </div>
 
