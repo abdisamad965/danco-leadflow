@@ -5,25 +5,35 @@ const STAFF_KEY = "danco_staff";
 const ASSIGNMENT_INDEX_KEY = "danco_assignment_index";
 
 const defaultStaff: Staff[] = [
-  { id: "s1", name: "Sarah Johnson", phone: "+1 555-0101", department: "Sales", active: true },
-  { id: "s2", name: "Michael Chen", phone: "+1 555-0102", department: "Sales", active: true },
-  { id: "s3", name: "Emily Rodriguez", phone: "+1 555-0103", department: "Support", active: true },
-  { id: "s4", name: "David Kim", phone: "+1 555-0104", department: "Sales", active: false },
-  { id: "s5", name: "Lisa Patel", phone: "+1 555-0105", department: "Marketing", active: true },
+  { id: "s1", name: "James Kamau", phone: "+254 712 345 001", department: "Sales", active: true },
+  { id: "s2", name: "Grace Wanjiku", phone: "+254 712 345 002", department: "Sales", active: true },
+  { id: "s3", name: "Peter Ochieng", phone: "+254 712 345 003", department: "Technical", active: true },
+  { id: "s4", name: "Faith Muthoni", phone: "+254 712 345 004", department: "Sales", active: false },
+  { id: "s5", name: "Brian Kiprop", phone: "+254 712 345 005", department: "Marketing", active: true },
 ];
 
 const defaultLeads: Lead[] = [
-  { id: "l1", name: "James Wilson", phone: "+1 555-1001", product: "Enterprise Suite", location: "New York", assignedStaff: "Sarah Johnson", status: "Contacted", createdAt: "2026-02-14T09:30:00Z" },
-  { id: "l2", name: "Anna Martinez", phone: "+1 555-1002", product: "Starter Plan", location: "Los Angeles", assignedStaff: "Michael Chen", status: "New", createdAt: "2026-02-15T08:15:00Z" },
-  { id: "l3", name: "Robert Taylor", phone: "+1 555-1003", product: "Pro Plan", location: "Chicago", assignedStaff: "Emily Rodriguez", status: "Interested", createdAt: "2026-02-13T14:45:00Z" },
-  { id: "l4", name: "Sophie Brown", phone: "+1 555-1004", product: "Enterprise Suite", location: "Houston", assignedStaff: "Sarah Johnson", status: "Closed", createdAt: "2026-02-12T11:20:00Z" },
-  { id: "l5", name: "Kevin Lee", phone: "+1 555-1005", product: "Pro Plan", location: "Phoenix", assignedStaff: "Lisa Patel", status: "Not Reachable", createdAt: "2026-02-14T16:00:00Z" },
-  { id: "l6", name: "Maria Garcia", phone: "+1 555-1006", product: "Starter Plan", location: "San Diego", assignedStaff: "Michael Chen", status: "Contacted", createdAt: "2026-02-15T10:30:00Z" },
-  { id: "l7", name: "Thomas Anderson", phone: "+1 555-1007", product: "Enterprise Suite", location: "Dallas", assignedStaff: "Emily Rodriguez", status: "New", createdAt: "2026-02-15T07:45:00Z" },
-  { id: "l8", name: "Jessica White", phone: "+1 555-1008", product: "Pro Plan", location: "San Jose", assignedStaff: "Sarah Johnson", status: "Interested", createdAt: "2026-02-14T13:10:00Z" },
+  { id: "l1", name: "David Mutua", phone: "+254 722 100 201", product: "HDPE Aquaflex Pipes", location: "Nairobi", assignedStaff: "James Kamau", status: "Contacted", createdAt: "2026-02-14T09:30:00Z" },
+  { id: "l2", name: "Agnes Nyambura", phone: "+254 733 200 302", product: "PPR Aquaflo Pipes", location: "Mombasa", assignedStaff: "Grace Wanjiku", status: "New", createdAt: "2026-02-15T08:15:00Z" },
+  { id: "l3", name: "John Otieno", phone: "+254 710 300 403", product: "Telecom Ducts", location: "Kisumu", assignedStaff: "Peter Ochieng", status: "Interested", createdAt: "2026-02-13T14:45:00Z" },
+  { id: "l4", name: "Esther Chebet", phone: "+254 720 400 504", product: "HDPE Aquaflex Pipes", location: "Eldoret", assignedStaff: "James Kamau", status: "Closed", createdAt: "2026-02-12T11:20:00Z" },
+  { id: "l5", name: "Samuel Kariuki", phone: "+254 711 500 605", product: "Sanitation Pipes", location: "Nakuru", assignedStaff: "Brian Kiprop", status: "Not Reachable", createdAt: "2026-02-14T16:00:00Z" },
+  { id: "l6", name: "Jean Pierre Habimana", phone: "+250 788 600 706", product: "PPR Aquaflo Pipes", location: "Kigali", assignedStaff: "Grace Wanjiku", status: "Contacted", createdAt: "2026-02-15T10:30:00Z" },
+  { id: "l7", name: "Wycliffe Barasa", phone: "+254 700 700 807", product: "HDPE Aquaflex Pipes", location: "Thika", assignedStaff: "Peter Ochieng", status: "New", createdAt: "2026-02-15T07:45:00Z" },
+  { id: "l8", name: "Diane Uwimana", phone: "+250 722 800 908", product: "Telecom Ducts", location: "Musanze", assignedStaff: "James Kamau", status: "Interested", createdAt: "2026-02-14T13:10:00Z" },
 ];
 
+const DATA_VERSION = "v2";
+const VERSION_KEY = "danco_data_version";
+
 function initializeData() {
+  const currentVersion = localStorage.getItem(VERSION_KEY);
+  if (currentVersion !== DATA_VERSION) {
+    localStorage.removeItem(STAFF_KEY);
+    localStorage.removeItem(LEADS_KEY);
+    localStorage.removeItem(ASSIGNMENT_INDEX_KEY);
+    localStorage.setItem(VERSION_KEY, DATA_VERSION);
+  }
   if (!localStorage.getItem(STAFF_KEY)) {
     localStorage.setItem(STAFF_KEY, JSON.stringify(defaultStaff));
   }
